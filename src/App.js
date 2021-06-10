@@ -102,6 +102,14 @@ class App extends Component {
     this.setState({
       work2Visible : !this.state.work2Visible
     })
+    // let check = this.state.work2Visible;
+    //   if(!check){
+    //     this.setState({
+    //       work_2:{
+    //         company : ""
+    //       }
+    //     })
+    //   }
   }
 
   toggleEducation2 = () => {
