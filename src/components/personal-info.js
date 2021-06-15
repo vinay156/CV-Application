@@ -7,7 +7,8 @@ class Personal extends Component {
             firstName: this.props.firstName,
             lastName: this.props.lastName,
             phone: this.props.phone,
-            email:this.props.email
+            email:this.props.email,
+            Error:""
         }
     }
 
@@ -17,18 +18,32 @@ class Personal extends Component {
         })
     }
 
+    valid = () => {
+        if(this.state.firstName==="" || this.state.lastName==="" || this.state.phone==="" || this.state.email===""){
+            this.setState({
+                Error: "Some input is empty"
+            })
+        }else{
+            return true;
+        }
+    }
+
     submitTask = (e) => {
         e.preventDefault();
-        this.props.handleData(
-            this.state.firstName,
-            this.state.lastName,
-            this.state.phone,
-            this.state.email
-        )
+        if(this.valid()){
+            this.setState({
+                Error:""
+            })
+            this.props.handleData(
+                this.state.firstName,
+                this.state.lastName,
+                this.state.phone,
+                this.state.email
+            )
+        }
     }
     
     render() { 
-        console.log(this.state);
         return (
             <div>
                 <h2>Personal Information</h2>
@@ -50,21 +65,23 @@ class Personal extends Component {
                     onChange={this.inputHandler}
                     />
                     <input 
-                    type="text" 
+                    type="tel"
+                    pattern="[0-9]{10}"
                     id="phoneno" 
-                    placeholder="Phone No"
+                    placeholder="Phone (length-10)"
                     name="phone"
                     value={this.state.phone}
                     onChange={this.inputHandler}
                     />
                     <input 
-                    type="text"     
+                    type="email"     
                     id="email" 
                     placeholder="Email"
                     name="email"
                     value={this.state.email}
                     onChange={this.inputHandler} 
                     />
+                     <p style={{color:"red", marginLeft:"25%"}}>{this.state.Error}</p>
                     <button type="submit" id="btn1" >Submit</button>
                 </form>
             </div>

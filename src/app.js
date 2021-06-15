@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import DisplayCv from './components/displayCv';
+import DisplayCv from './components/display-cv';
 import Education from './components/education';
-import Personal from "./components/personalInfo"
-import Work from "./components/workExperience"
+import Personal from "./components/personal-info"
+import Work from "./components/work-experience"
 import "./styles.css"
 
 class App extends Component {
@@ -48,7 +48,6 @@ class App extends Component {
         details: "",
       },
       resumeIsVisible: false,
-
       work2Visible: false,
       edu2Visible: false,
     };
@@ -67,7 +66,7 @@ class App extends Component {
 
 
   handleWorkData = (company, position, from, to, city, description, id) => {
-    this.setState((prevState) => ({
+    this.setState({
       [id]:{
         company:company,
         position:position,
@@ -76,11 +75,11 @@ class App extends Component {
         city:city,
         description:description
       }
-    }))
+    })
   }
 
   handleEducationData = (university, major, stu_from, stu_to, location, details, id) => {
-    this.setState((prevState) => ({
+    this.setState({
       [id]:{
         university:university,
         major:major,
@@ -89,7 +88,7 @@ class App extends Component {
         location:location,
         details:details
       }
-    }))
+    })
   }
 
   toggleResumeDisplay = () => {
@@ -102,14 +101,6 @@ class App extends Component {
     this.setState({
       work2Visible : !this.state.work2Visible
     })
-    // let check = this.state.work2Visible;
-    //   if(!check){
-    //     this.setState({
-    //       work_2:{
-    //         company : ""
-    //       }
-    //     })
-    //   }
   }
 
   toggleEducation2 = () => {
@@ -176,24 +167,24 @@ class App extends Component {
              visible={this.state.edu2Visible}
              buttonVisible={true}
              />
-             {this.state.edu2Visible && (
-               <Education 
-               id="edu_2"
-               handleData={this.handleEducationData}
-               university={this.state.edu_2.university}
-               major={this.state.edu_2.major}
-               stu_from={this.state.edu_2.stu_from}
-               stu_to={this.state.edu_2.stu_to}
-               location={this.state.edu_2.location}
-               details={this.state.edu_2.details}
-               onClick={this.toggleEducation2}
-               visible={this.state.edu2Visible}
-               buttonVisible={false}
-               />
-             )}
-             <div>
-                    <button id="btn3" onClick={this.toggleResumeDisplay}>Display CV</button>
-                </div>
+              {this.state.edu2Visible && (
+                <Education 
+                id="edu_2"
+                handleData={this.handleEducationData}
+                university={this.state.edu_2.university}
+                major={this.state.edu_2.major}
+                stu_from={this.state.edu_2.stu_from}
+                stu_to={this.state.edu_2.stu_to}
+                location={this.state.edu_2.location}
+                details={this.state.edu_2.details}
+                onClick={this.toggleEducation2}
+                visible={this.state.edu2Visible}
+                buttonVisible={false}
+                />
+              )}
+              <div>
+                <button id="btn3" onClick={this.toggleResumeDisplay}>Display CV</button>
+              </div>
              </>
           ):(
             <div>
@@ -206,6 +197,7 @@ class App extends Component {
               />
               <div>
                   <button id="btn3" onClick={this.toggleResumeDisplay}>Edit CV</button>
+                  {/* <a href="/display-cv" download="cv"><button type="button">Download</button></a> */}
               </div>
             </div>
           )}

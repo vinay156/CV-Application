@@ -12,7 +12,8 @@ class Education extends Component {
             stu_to:this.props.stu_to,
             location:this.props.location,
             details:this.props.details,
-            id: this.props.id
+            id: this.props.id,
+            Error:""
         }
     }
 
@@ -22,8 +23,24 @@ class Education extends Component {
         })
     }
 
+    valid = () => {
+        if(this.state.university==="" || this.state.major==="" || this.state.stu_from==="" || this.state.stu_to==="" || 
+        this.state.location==="" || this.state.details===""){
+            this.setState({
+                Error: "Some input is empty"
+            })
+        }else{
+            return true;
+        }
+    }
+
     submitTask = (e) => {
         e.preventDefault();
+        if(this.valid()){
+            this.setState({
+                Error:""
+            })
+        }
         this.props.handleData(
             this.state.university,
             this.state.major,
@@ -49,21 +66,22 @@ class Education extends Component {
                     <input type="text" id="email" placeholder="City, Country" name="location" value={this.state.location} onChange={this.inputHandler} />
                     <label for="from" id="l3">Details:</label>
                     <textarea id="details" name="details" value={this.state.details} onChange={this.inputHandler}/>
+                    <p style={{color:"red", marginLeft:"25%"}}>{this.state.Error}</p>
                     <button type="submit" id="btn1" >Submit</button>
                 </form>
                 <div>
-                    {this.props.buttonVisible ? (<>{!this.props.visible ? (
-                                <button onClick={this.props.onClick} id="btn2">
-                                Add Education
-                                </button>
-                            ) : (
-                                <button onClick={this.props.onClick} id="btn2">
-                                Remove Education
-                                </button>
-                            )}
-                        </>):(<></>)}
+                {this.props.buttonVisible ? (
+                    <>
+                    {!this.props.visible ? (
+                            <button onClick={this.props.onClick} id="btn2">Add Education</button>
+                        ) : (
+                            <button onClick={this.props.onClick} id="btn2">Remove Education</button>
+                        )}
+                    </>
+                    ):(
+                    <></>
+                    )}
                 </div>
-                
             </div>
         );
     }
